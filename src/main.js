@@ -10,7 +10,7 @@ axios.defaults.baseURL="http://localhost:8888/api/private/v1/"
 axios.interceptors.request.use(config=>{
 
 config.headers.Authorization= window.sessionStorage.getItem("token");
-console.log(config)
+//console.log(config)
 	return config
 })
 Vue.prototype.$http=axios

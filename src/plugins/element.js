@@ -10,7 +10,17 @@ import { Header,
 	Message,
 	Menu,
 	Submenu,
-	MenuItem
+	MenuItem,
+	breadcrumb,
+	breadcrumbItem,
+	Card,
+	Row,
+	Col,
+	Table,
+	TableColumn,
+	Switch,
+	Tooltip,
+	Pagination
 
 } from 'element-ui'
 
@@ -28,6 +38,15 @@ Vue.use(Container)
 Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
-
+Vue.use(breadcrumb)
+Vue.use(breadcrumbItem)
+Vue.use(Card)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Switch)
+Vue.use(Tooltip)
+Vue.use(Pagination)
 //Message 需要挂在到vue的全局对象中
 Vue.prototype.$message = Message

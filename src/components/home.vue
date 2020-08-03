@@ -17,7 +17,9 @@
         	时间：2020-08-03
         	描述：侧边栏
         -->
-				<el-menu unique-opened :collapse="toggleFlag" :collapse-transition="false"  
+        		<!--//router="true"为侧边栏开启路由跳转-->
+        		<!-- default-active="" 高亮显示的菜单index-->
+				<el-menu unique-opened :collapse="toggleFlag" :collapse-transition="false"  :router="true" :default-active="router_index"
 					background-color="#333744" text-color="#fff" active-text-color="#409eff">
 					<!--
       	作者：offline
@@ -31,8 +33,8 @@
 							<span>{{item.authName}}</span>
 						</template>
 						<!-- 二级菜单-->
-						<el-menu-item :index="subitem.id+''" 
-							v-for="subitem in item.children" :key="subitem.id" >
+						<el-menu-item :index="'/'+subitem.path+''" 
+							v-for="subitem in item.children" :key="subitem.id" @click="showItemActive('/'+subitem.path+'')">
 							<template slot="title">
 								<i class="el-icon-menu"></i>
 								<span>{{subitem.authName}}</span>
@@ -43,8 +45,8 @@
 				</el-menu>
 
 			</el-aside>
-			<el-main>Main
-
+			<el-main>
+				<router-view></router-view>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -63,12 +65,14 @@
 					'102':'iconfont icon-danju',
 					'145':'iconfont icon-baobiao',
 				},
-				toggleFlag:false
+				toggleFlag:false,
+				router_index:""
 
 			}
 		},
 		created() {
 			this.getMenuList();
+			this.router_index=window.sessionStorage.getItem("router_index")
 		},
 		methods: {
 
@@ -88,6 +92,11 @@
 			},
 			toggle:function(){
 				this.toggleFlag=!this.toggleFlag;
+			},
+			showItemActive:function(index){
+				this.router_index=index;
+				//保持高亮状态效果
+				window.sessionStorage.setItem("router_index",index);
 			}
 		}
 	};

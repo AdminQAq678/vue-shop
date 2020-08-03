@@ -2,13 +2,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '../components/login.vue'
 import home from '../components/home.vue'
+import welcome from '../components/welcome.vue'
+import users from '../components/user/users.vue'
+import roles from '../components/privi/roles.vue'
 import '../assets/css/global.css'
 Vue.use(VueRouter)
-
+//解决路由多次定向到同一位置报错
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
   const routes = [
-{path:'/',component:login},
+{path:'/',component:home},
   {path:"/login",component:login},
-  {path:"/home",component:home}
+  
+  //home重定向到/welcome 显示子路由
+  {path:"/home",component:home,redirect:"/welcome",children:[
+  {path:"/welcome",component:welcome},
+  {path:"/users",component:users},
+  {path:"/roles",component:roles}
+  ]}
 ]
 
 const router = new VueRouter({
