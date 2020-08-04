@@ -1,4 +1,4 @@
-# vue-shop
+# vue-shop 黑马电商项目
 
 ## Project setup
 ```

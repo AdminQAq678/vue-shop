@@ -1,16 +1,23 @@
 html,body,#app{
+	
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
 }
-
+@media screen and (max-width: 1000px) {
+			   html,body,#app{
+					width:1000px;
+				}
+			 }
 .el-breadcrumb {
 		margin-bottom: 10px;
 		font-size: 12px;
 	}
 	
 .el-card {
+	
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
+	width:100%;
 }
 .el-table{
 	margin-top: 15px;

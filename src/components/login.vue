@@ -17,10 +17,10 @@
 					    	 prefix-icon="el-icon-lock"></el-input>
 					  </el-form-item>
 					    <el-form-item class="btns" >
-						  <el-button type="primary" @click="login" >
+						  <el-button type="primary" @click.native="login" >
 						  	登录
 						  </el-button>
-						  <el-button type="info" @click="reset">
+						  <el-button type="info" @click.native="reset">
 						  	重置
 						  </el-button>
 					  </el-form-item>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	export default{
+	export default {
 		data(){
 			return {
 				loginform:{
@@ -48,26 +48,34 @@
 				}
 			}
 		},
-		mounted(){
-			this.scroll = new Bscroll(this.$refs.wrapper, { mouseWheel: true, click: true, tap: true })
-		},
+		
 		methods:{
 			reset:function(){
 				//重置表单
 				
 				this.$refs.loginformRef.resetFields();
 			},
-			login:function(){
+			login:  function(){
+				
 				//登录预验证
-				this.$refs.loginformRef.validate( async (valid)=>{
+				this.$refs.loginformRef.validate(  (valid)=>{
 					//valid为验证结果
 //					console.log(valid);
+					
 					if(!valid){
+						
 						return ;
 					}
+					alert(valid)
 					//解构data属性，重命名为res
-					const {data:res}= await this.$http.post("login",this.loginform);
+//					const {data:res}= await this.$http.post("login",this.loginform);
+					const data=  this.$http.post("login",this.loginform);
+					var res;
+					data.then((val)=>{
+						res=val.data;
+						console.log(res)
 //					console.log(res)
+						alert(res.meta.status)
 					if(res.meta.status!=200){
 						console.log(res.meta.msg)
 						return this.$message.error("登录失败")
@@ -77,9 +85,12 @@
 					 
 					 //保存token
 					 window.sessionStorage.setItem("token",res.data.token)
-					 
+					
 					 //编程式导航跳转
 					 this.$router.push("/home")
+					 
+					
+					})
 					
 				});
 			}
