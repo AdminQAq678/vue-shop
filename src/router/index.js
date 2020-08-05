@@ -33,10 +33,10 @@ router.beforeEach((to,from,next)=>{
 	//from 当前页面
 	// next 放行函数
 	//放行登录页面
-//	if(to.path==='/login') return next();
-//	//获取token
-//	const tokenStr=window.sessionStorage.getItem("token");
-//	if(!tokenStr)return next('/login');
+	if(to.path==='/login') return next();
+	//获取token
+	const tokenStr=window.sessionStorage.getItem("token");
+	if(!tokenStr)return next('/login');
 	next();
 })
 

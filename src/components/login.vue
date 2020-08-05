@@ -66,18 +66,18 @@
 						
 						return ;
 					}
-					alert(valid)
+					
 					//解构data属性，重命名为res
 //					const {data:res}= await this.$http.post("login",this.loginform);
 					const data=  this.$http.post("login",this.loginform);
 					var res;
 					data.then((val)=>{
 						res=val.data;
-						console.log(res)
+//						console.log(res)
 //					console.log(res)
-						alert(res.meta.status)
+//						alert(res.meta.status)
 					if(res.meta.status!=200){
-						console.log(res.meta.msg)
+//						console.log(res.meta.msg)
 						return this.$message.error("登录失败")
 						
 					}
