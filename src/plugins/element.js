@@ -21,7 +21,8 @@ import { Header,
 	Switch,
 	Tooltip,
 	Pagination,
-	Dialog
+	Dialog,
+	MessageBox
 
 } from 'element-ui'
 
@@ -52,3 +53,4 @@ Vue.use(Pagination)
 Vue.use(Dialog)
 //Message 需要挂在到vue的全局对象中
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm

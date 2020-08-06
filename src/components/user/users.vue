@@ -56,7 +56,7 @@
 						<!--修改用户信息-->
 							<el-button @click="showEditUserDialog(scope.row.id)" size="small" type="primary" icon="el-icon-edit"></el-button>
 
-							<el-button size="small" type="danger" icon="el-icon-delete"></el-button>
+							<el-button size="small" type="danger" icon="el-icon-delete" @click='removeUserById(scope.row.id)'></el-button>
 						
 						<!--enterable ： false 鼠标不可进入文字提示中，即文字提示会自动消失-->
 						<el-tooltip class="item" effect="dark" content="分配角色" placement="top" :enterable="false">
@@ -370,6 +370,29 @@
 			//重置编辑用户对话框表单
 			editFormReset:function(){
 				this.$refs.editForm.resetFields();
+			},
+			removeUserById:async function(id){
+				const result = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+			          confirmButtonText: '确定',
+			          cancelButtonText: '取消',
+			          type: 'warning'
+			        }).catch((err) => {
+			          this.$message({
+			            type: 'info',
+			            message: '已取消删除'
+			          });
+			          return err;
+			        });
+			        if(result==='confirm'){
+			        	//this.$message.success("确认了删除")
+			        	const {data:res}=await this.$http.delete('users/'+id);
+			        	console.log(res)
+			        	if(res.meta.status!==200){
+			        		return this.$message.error("删除用户失败")
+			        	}
+			        	this.$message.success("删除用户成功")
+			        	this.getUserList()
+			        }
 			}
 		}
 	}
