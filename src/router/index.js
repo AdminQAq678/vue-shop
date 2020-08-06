@@ -5,6 +5,7 @@ import home from '../components/home.vue'
 import welcome from '../components/welcome.vue'
 import users from '../components/user/users.vue'
 import roles from '../components/privi/roles.vue'
+import rights from '../components/privi/rights.vue'
 import '../assets/css/global.css'
 Vue.use(VueRouter)
 //解决路由多次定向到同一位置报错
@@ -18,10 +19,12 @@ const originalPush = VueRouter.prototype.push
   
   //home重定向到/welcome 显示子路由
   {path:"/home",component:home,redirect:"/welcome",children:[
-  {path:"/welcome",component:welcome},
-  {path:"/users",component:users},
-  {path:"/roles",component:roles}
-  ]}
+	  {path:"/welcome",component:welcome},
+	  {path:"/users",component:users},
+	  {path:"/roles",component:roles},
+	  {path:"/rights",component:rights}
+ 	 ]
+  }
 ]
 
 const router = new VueRouter({
